@@ -4,7 +4,7 @@ module.exports = {
     register: async (req, res) => {
         const {username, password, isAdmin} = req.body;
         const db = req.app.get('db');
-        const existingUser = await db.get_user(username);
+        const existingUser = await db.get_user({username});
         if (existingUser[0]) {
             res.status(409).send('Username taken');
         } else {

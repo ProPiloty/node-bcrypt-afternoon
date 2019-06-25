@@ -42,3 +42,4 @@ app.get('/auth/logout', authCtrl.logout); // LOGS OUT A USER
 app.get('/api/treasure/dragon', treasureCtrl.dragonTreasure); // GETS DRAGON TREASURE
 app.get('/api/treasure/user', auth.usersOnly, treasureCtrl.getUserTreasure); // GETS USER TREASURE
 app.post('/api/treasure/user', auth.usersOnly, treasureCtrl.addUserTreasure); // ADDS USER TREASURE
+app.get('/api/treasure/all', auth.usersOnly, auth.adminsOnly, treasureCtrl.getAllTreasure); // GETS ALL TREASURE
