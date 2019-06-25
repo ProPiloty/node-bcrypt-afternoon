@@ -1,5 +1,5 @@
 INSERT INTO users
 (is_admin, username, hash)
 VALUES
-($1, $2, $3)
-returning *;
+(${isAdmin}, ${username}, ${hash})
+returning id, is_admin, username;
