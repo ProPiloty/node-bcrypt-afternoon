@@ -1,12 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-// const bcrypt = require('bcryptjs');
 const massive = require('massive');
 
-// Controllers
+// CONTROLLERS
 const authCtrl = require('./controllers/authController');
 const treasureCtrl = require('./controllers/treasureController');
+
+// MIDDLEWARE
+const auth = require('./middleware/authMiddleware');
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
@@ -37,4 +39,6 @@ app.post('/auth/login', authCtrl.login); // LOGS IN A USER
 app.get('/auth/logout', authCtrl.logout); // LOGS OUT A USER
 
 // TREASURE ENDPOINTS
-app.get('/api/treasure/dragon', treasureCtrl.dragonTreasure) // GETS DRAGON TREASURE
+app.get('/api/treasure/dragon', treasureCtrl.dragonTreasure); // GETS DRAGON TREASURE
+app.get('/api/treasure/user', auth.usersOnly, treasureCtrl.getUserTreasure); // GETS USER TREASURE
+app.post('/api/treasure/user', auth.usersOnly, treasureCtrl.addUserTreasure); // ADDS USER TREASURE

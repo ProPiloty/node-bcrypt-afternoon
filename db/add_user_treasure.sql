@@ -1,7 +1,7 @@
 INSERT INTO treasures
 (image_url, user_id)
 VALUES
-($1, $2);
+(${treasureURL}, ${id});
 
 SELECT * FROM treasures
-WHERE user_id = $2;
+WHERE user_id = ${id};
