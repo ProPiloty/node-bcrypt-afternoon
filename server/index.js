@@ -6,6 +6,7 @@ const massive = require('massive');
 
 // Controllers
 const authCtrl = require('./controllers/authController');
+const treasureCtrl = require('./controllers/treasureController');
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
@@ -30,4 +31,10 @@ massive(CONNECTION_STRING).then(database => {
     })
 })
 
-app.post('/auth/register', authCtrl.register);
+// AUTH ENDPOINTS
+app.post('/auth/register', authCtrl.register); // REGISTERS A USER
+app.post('/auth/login', authCtrl.login); // LOGS IN A USER
+app.get('/auth/logout', authCtrl.logout); // LOGS OUT A USER
+
+// TREASURE ENDPOINTS
+app.get('/api/treasure/dragon', treasureCtrl.dragonTreasure) // GETS DRAGON TREASURE
